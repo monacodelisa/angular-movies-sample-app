@@ -9,18 +9,19 @@ import { map, Observable } from "rxjs";
 	providedIn: "root",
 })
 export class MovieService {
+  apiUrl = "https://rest-api.monacodelisa.dev/api/movies";
 	private http: HttpClient = inject(HttpClient);
 
 	getMovies(): Observable<Movie[]> {
 		return this.http.get<Movie[]>(
 			// "https://monacodelisa-node-express.cyclic.app/api/movies"
-			"https://rest-api.monacodelisa.dev/api/movies"
+			this.apiUrl
 		);
 	}
 
 	getMovieActors(selectedMovie: Movie): Observable<Actor[]> {
 		return this.http
-			.get<Movie[]>("https://rest-api.monacodelisa.dev/api/movies")
+			.get<Movie[]>(this.apiUrl)
 			.pipe(
 				map((movies: Movie[]) => {
 					const foundMovie = movies.find(
@@ -33,7 +34,7 @@ export class MovieService {
 
 	getMoviesByCategory(categorySlug: string): Observable<Movie[]> {
 		return this.http
-			.get<Movie[]>("https://monacodelisa-node-express.cyclic.app/api/movies")
+			.get<Movie[]>(this.apiUrl)
 			.pipe(
 				map((movies: Movie[]) => {
 					const lowerCaseSlug = categorySlug.toLowerCase().split(" ").join("-");
