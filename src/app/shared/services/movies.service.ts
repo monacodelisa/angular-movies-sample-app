@@ -9,7 +9,8 @@ import { map, Observable } from "rxjs";
 	providedIn: "root",
 })
 export class MovieService {
-  apiUrl = "https://rest-api.monacodelisa.dev/api/movies";
+  // apiUrl = "https://rest-api.monacodelisa.dev/api/movies";
+  apiUrl = "https://dummy-data.ewbeserver.de/api/movies";
 	private http: HttpClient = inject(HttpClient);
 
 	getMovies(): Observable<Movie[]> {
